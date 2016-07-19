@@ -2,7 +2,7 @@
  * grunt-tdscli
  * https://github.com/totvstec/grunt-tdscli
  *
- * Copyright (c) 2016 
+ * Copyright (c) 2016
  * Licensed under the MIT license.
  */
 
@@ -14,7 +14,7 @@ var fs = require('fs');
 
 module.exports = function (grunt) {
 
-    var _getTdsHome = function () {
+	function _getTdsHome() {
         var home = process.env["TDS_HOME"];
 
         if (home === undefined) {
@@ -29,9 +29,9 @@ module.exports = function (grunt) {
         grunt.log.writeln("Usando TDS_HOME='" + home + "'");
 
         return home;
-    };
+    }
 
-    var _getTdsCliExecutable = function (home) {
+    function _getTdsCliExecutable(home) {
         var files = fs.readdirSync(home);
 
         for (var i = 0; i < files.length; i++) {
@@ -41,7 +41,7 @@ module.exports = function (grunt) {
         }
 
         return null;
-    };
+    }
 
     function _buildOptions(home, cli, task) {
         var data = task.data;
@@ -67,9 +67,9 @@ module.exports = function (grunt) {
             keys.splice(index, 1);
         }
 
-        keys.forEach(function(key, index) {
+        keys.forEach(function (key, index) {
             var value = key + "=";
-            
+
             if (Array.isArray(data[key])) {
                 value += data[key].join(";");
             }
@@ -103,11 +103,11 @@ module.exports = function (grunt) {
         grunt.util.spawn(options, function (error, result, code) {
             try {
                 if (error === null) {
-                    var err = result.stderr.replace(/^Warning: NLS unused message: (.*)$/gm, "").trim();                    
+                    var err = result.stderr.replace(/^Warning: NLS unused message: (.*)$/gm, "").trim();
                     var out = result.stdout.trim();
                     out = out.replace(/^>>>>> Compil.*(.|[\r\n])*?>>>>\s*$/gm, "0");
                     out = out.replace(/^>>>>.*(.|[\r\n])*?>>>>\s*$/gm, "");
-                    
+
                     console.log(out);
 
 
@@ -126,42 +126,6 @@ module.exports = function (grunt) {
             }
         });
 
-        console.log("--- end task ---");
-
-        /*
-        
-            // Merge task-specific and/or target-specific options with these defaults.
-            var options = this.options({
-              punctuation: '.',
-              separator: ', '
-            });
-        
-            // Iterate over all specified file groups.
-            this.files.forEach(function(f) {
-              // Concat specified files.
-              var src = f.src.filter(function(filepath) {
-                // Warn on and remove invalid source files (if nonull was set).
-                if (!grunt.file.exists(filepath)) {
-                  grunt.log.warn('Source file "' + filepath + '" not found.');
-                  return false;
-                } else {
-                  return true;
-                }
-              }).map(function(filepath) {
-                // Read file source.
-                return grunt.file.read(filepath);
-              }).join(grunt.util.normalizelf(options.separator));
-        
-              // Handle options.
-              src += options.punctuation;
-        
-              // Write the destination file.
-              grunt.file.write(f.dest, src);
-        
-              // Print a success message.
-              grunt.log.writeln('File "' + f.dest + '" created.');
-            });
-            */
     });
 
 };
