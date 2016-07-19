@@ -1,0 +1,35 @@
+{
+  "name": "grunt-tdscli",
+  "description": "Compile programas AdvPl",
+  "version": "0.0.1",
+  "homepage": "https://github.com/totvstec/grunt-tdscli",
+  "author": {
+      "name": "Rogerio Ribeiro da Cruz",
+      "email": "rogeriorc@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/totvstec/grunt-tdscli.git"
+  },
+  "bugs": {
+    "url": "https://github.com/totvstec/grunt-tdscli/issues"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "devDependencies": {
+    "grunt-contrib-jshint": "^0.9.2",
+    "grunt-contrib-clean": "^0.5.0",
+    "grunt-contrib-nodeunit": "^0.3.3",
+    "grunt": "~0.4.5"
+  },
+  "keywords": [
+    "gruntplugin",
+    "totvs",
+    "tds"
+  ]
+}
