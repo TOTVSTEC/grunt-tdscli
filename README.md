@@ -1,6 +1,6 @@
 # grunt-tdscli
 
-> Compile programas AdvPl.
+> Automate TDS tasks.
 
 ## Getting Started
 This plugin requires Grunt `~0.4.5`
@@ -28,62 +28,125 @@ grunt.initConfig({
     options: {
       // Task-specific options go here.
     },
-    your_target: {
+    compile: {
       // Target-specific file lists and/or options go here.
-    },
-  },
+    }
+  }
 });
 ```
 
 ### Options
 
-#### options.separator
-Type: `String`
+#### workspace
+Type: `String` 
+<!---
 Default value: `',  '`
+-->
 
-A string value that is used to do something with whatever.
+The path to the workspace full path.
 
-#### options.punctuation
+#### serverType
 Type: `String`
-Default value: `'.'`
+<!--Default value: `'AdvPL'`-->
 
-A string value that is used to do something else with whatever else.
+#### server
+Type: `String`
 
-### Usage Examples
+#### build
+Type: `String`
 
-#### Default Options
-In this example, the default options are used to do something with whatever. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result would be `Testing, 1 2 3.`
+#### port
+Type: `Number`
 
-```js
-grunt.initConfig({
-  tdscli: {
-    options: {},
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
-  },
-});
-```
+#### user
+Type: `String`
 
-#### Custom Options
-In this example, custom options are used to do something else with whatever else. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result in this case would be `Testing: 1 2 3 !!!`
+#### psw
+Type: `String`
+
+#### environment
+Type: `String`
+
+#### authorization
+Type: `String`
+
+#### recompile
+Type: `Boolean`
+Default value: `false`
+
+#### program
+Type: `String` or `Array` 
+
+#### includes
+Type: `String` or `Array`
+
+
+### Targets
+
+#### compile
+Compile source files and resources
 
 ```js
 grunt.initConfig({
   tdscli: {
     options: {
-      separator: ': ',
-      punctuation: ' !!!',
+
     },
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
-  },
+    compile: {
+      recompile: true,
+      program: [
+        "AdvPL/src/cloud.prw",
+        "AdvPL/src/sample.cloud",
+        "AdvPL/res/logo.png"
+      ],
+      includes: [
+        "C:/dev/include",
+        "C:/dev/include-lib"
+      ]
+    }
+  }
 });
 ```
 
+#### deleteprog
+Remove source files and resources
+```js
+```
+
+#### defragrpo
+Defragments the server repository
+```js
+```
+
+#### clearlog
+Clears the repository history
+```js
+```
+
+#### patchgen
+Creates an update package
+```js
+```
+
+#### patchapply
+Apply an update package
+```js
+```
+
+#### patchinfo
+Lists the content of an update package
+```js
+```
+
+#### patchhist
+Displays the history of update packages applications
+```js
+```
+
+
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
+
 
 ## Release History
 _(Nothing yet)_

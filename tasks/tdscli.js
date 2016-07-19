@@ -12,7 +12,22 @@ var _s = require("underscore.string");
 var path = require('path');
 var fs = require('fs');
 
-module.exports = function (grunt) {
+module.exports = function(grunt) {
+
+	function _extend(origin, add) {
+		if (!add || (typeof add !== 'object' && add !== null)) {
+			return origin;
+		}
+
+		var keys = Object.keys(add);
+		var i = keys.length;
+
+		while (i--) {
+			origin[keys[i]] = add[keys[i]];
+		}
+
+		return origin;
+	}
 
 	function _getTdsHome() {
         var home = process.env["TDS_HOME"];
@@ -43,8 +58,7 @@ module.exports = function (grunt) {
         return null;
     }
 
-    function _buildOptions(home, cli, task) {
-        var data = task.data;
+    function _buildOptions(home, cli, target, data) {
         var opts = {
             cmd: home + cli,
             args: [],
@@ -53,7 +67,7 @@ module.exports = function (grunt) {
             }
         };
 
-        opts.args.push(task.target);
+        opts.args.push(target);
 
         if (data.workspace) {
             opts.args.push("-data");
@@ -67,7 +81,7 @@ module.exports = function (grunt) {
             keys.splice(index, 1);
         }
 
-        keys.forEach(function (key, index) {
+        keys.forEach(function(key, index) {
             var value = key + "=";
 
             if (Array.isArray(data[key])) {
@@ -87,7 +101,7 @@ module.exports = function (grunt) {
     // Please see the Grunt documentation for more information regarding task
     // creation: http://gruntjs.com/creating-tasks
 
-    grunt.registerMultiTask('tdscli', 'Compile programas AdvPl.', function () {
+    grunt.registerMultiTask('tdscli', 'Automate TDS tasks', function() {
         var home = _getTdsHome();
         var cli = _getTdsCliExecutable(home);
 
@@ -96,11 +110,12 @@ module.exports = function (grunt) {
         }
 
         var done = this.async();
-        var options = _buildOptions(home, cli, this);
+		var data = _extend(_extend({}, grunt.config.data[this.name].options), this.data);
+        var options = _buildOptions(home, cli, this.target, data);
 
         console.log("\n" + options.cmd + " " + options.args.join(" ") + "\n");
 
-        grunt.util.spawn(options, function (error, result, code) {
+        grunt.util.spawn(options, function(error, result, code) {
             try {
                 if (error === null) {
                     var err = result.stderr.replace(/^Warning: NLS unused message: (.*)$/gm, "").trim();
@@ -109,7 +124,6 @@ module.exports = function (grunt) {
                     out = out.replace(/^>>>>.*(.|[\r\n])*?>>>>\s*$/gm, "");
 
                     console.log(out);
-
 
                     if (err) {
                         console.error("\n" + err["red"]);

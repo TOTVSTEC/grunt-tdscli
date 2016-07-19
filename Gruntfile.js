@@ -30,7 +30,7 @@ module.exports = function(grunt) {
 
         // Configuration to be run (and then tested).
         tdscli: {
-            compile: {
+			options: {
                 workspace: "C:/Users/roger/Workspaces/TDS_113/",
                 serverType: "AdvPL",
                 server: "127.0.0.1",
@@ -40,16 +40,26 @@ module.exports = function(grunt) {
                 psw: "",
                 environment: "ENVIRONMENT",
                 authorization: "C:/Users/roger/autoriza.aut",
-                recompile: true,
-                program: [
-                    "AdvPL/Koji/MCheckinGS.prw",
-                    "AdvPL/Koji/sample1.cloud"
-                ],
-                includes: [
-                    "C:/dev/src/framework/Lib110/include",
-                    "C:/dev/src/framework/Lib110/include-lib"
-                ]
-            }
+			},
+            compile: {
+				recompile: true,
+				program: [
+					"AdvPL/Koji/MCheckinGS.prw",
+					"AdvPL/Koji/sample1.cloud"
+				],
+				includes: [
+					"C:/dev/src/framework/Lib110/include",
+					"C:/dev/src/framework/Lib110/include-lib"
+				]
+            },
+			/*
+			deleteprog: {
+				program: [
+					"AdvPL/Koji/MCheckinGS.prw",
+					"AdvPL/Koji/sample1.cloud"
+				]
+			}
+			*/
         },
 
         // Unit tests.
