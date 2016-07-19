@@ -1,7 +1,7 @@
 {
   "name": "grunt-tdscli",
   "description": "Automate TDS tasks",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "homepage": "https://github.com/totvstec/grunt-tdscli",
   "author": {
     "name": "Rogerio Ribeiro da Cruz",
