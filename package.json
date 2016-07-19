@@ -4,8 +4,8 @@
   "version": "0.0.1",
   "homepage": "https://github.com/totvstec/grunt-tdscli",
   "author": {
-      "name": "Rogerio Ribeiro da Cruz",
-      "email": "rogeriorc@gmail.com"
+    "name": "Rogerio Ribeiro da Cruz",
+    "email": "rogeriorc@gmail.com"
   },
   "repository": {
     "type": "git",
